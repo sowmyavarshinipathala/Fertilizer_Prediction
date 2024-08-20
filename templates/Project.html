@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fertilizer Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, #4CAF50, #2E7D32);
+            color: #fff;
+        }
+
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+
+        #home {
+            
+            height: 100vh;
+            text-align: center;
+            color: #000000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        #home h1 {
+            font-size: 3rem;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        #home p {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        #form {
+            background: #333;
+            padding: 30px;
+            border-radius: 10px;
+            margin-top: -50px;
+        }
+
+        #form h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin: 10px 0 5px;
+        }
+
+        input, select, button {
+            padding: 10px;
+            margin: 5px 0 20px;
+            border-radius: 5px;
+            border: none;
+        }
+
+        button {
+            background: #4CAF50;
+            color: white;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        button:hover {
+            background: #45A049;
+        }
+    </style>
+</head>
+<body>
+    <!-- Home Page Section -->
+    <section id="home">
+        <div class="container">
+            <h1>Fertilizer Prediction</h1>
+            <p>Welcome to the Fertilizer Prediction System. This system will help you predict the best fertilizer for your crops based on environmental factors and soil conditions.</p>
+            
+        </div>
+    </section>
+
+    <!-- Form Page Section -->
+    <section id="form">
+        <div class="container">
+            <h2>Input Details</h2>
+            <form action="{{ url_for('predict_datapoint') }}" method="POST">
+                <label for="temperature">Temperature (°C):</label>
+                <input type="number" id="temperature" name="temperature" required><br>
+
+                <label for="humidity">Humidity (%):</label>
+                <input type="number" id="humidity" name="humidity" required><br>
+
+                <label for="moisture">Moisture (%):</label>
+                <input type="number" id="moisture" name="moisture" required><br>
+
+                <label for="soilType">Soil Type:</label>
+                <select id="soilType" name="soilType">
+                    <option value="0">Black</option>
+                    <option value="1">Clayey</option>
+                    <option value="2">Loamy</option>
+                    <option value="3">Red</option>
+                    <option value="4">Sandy</option>
+                </select><br>
+
+                <label for="cropType">Crop Type:</label>
+                <select id="cropType" name="cropType">
+                    <option value="0">Barley</option>
+                    <option value="1">Cotton</option>
+                    <option value="2">Ground Nuts</option>
+                    <option value="3">Maize</option>
+                    <option value="4">Millets</option>
+                    <option value="5">Oil seeds</option>
+                    <option value="6">Paddy</option>
+                    <option value="7">Pulses</option>
+                    <option value="8">Sugarcane</option>
+                    <option value="9">Tobacco</option>
+                    <option value="10">Wheat</option>
+                </select><br>
+
+                <label for="nitrogen">Nitrogen (N):</label>
+                <input type="number" id="nitrogen" name="nitrogen" required><br>
+
+                <label for="potassium">Potassium (K):</label>
+                <input type="number" id="potassium" name="potassium" required><br>
+
+                <label for="phosphorous">Phosphorous (P):</label>
+                <input type="number" id="phosphorous" name="phosphorous" required><br>
+
+                <button type="submit" class="btn btn-primary btn-block btn-large">Submit</button>
+            </form>
+            <h2>
+                  Most suaitable fertilizer for your crop is {{result}}
+            </h2>
+        </div>
+    </section>
+</body>
+</html>
