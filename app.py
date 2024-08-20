@@ -1,8 +1,6 @@
 import pickle
-from flask import Flask,request,jsonify,render_template
-import numpy 
-import pandas
-from sklearn.preprocessing import StandardScaler
+from flask import Flask,request,render_template
+
 
 app= Flask(__name__)
 
@@ -42,9 +40,3 @@ def predict_datapoint():
 
     else:
         return render_template('Project.html')
-
-
-
-
-if __name__=="__main__":
-    app.run(host='0.0.0.0',port=5000)
