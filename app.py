@@ -42,3 +42,7 @@ def predict_datapoint():
 
     else:
         return render_template('Project.html')
+    from app import app
+
+if __name__ == '__main__':
+    app.run(debug=True)
