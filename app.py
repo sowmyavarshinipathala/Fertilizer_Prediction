@@ -1,18 +1,21 @@
 import pickle
 from flask import Flask,request,render_template
-# import numpy 
-# import pandas
-# from sklearn.preprocessing import StandardScaler
+import numpy 
+import pandas
+from sklearn.preprocessing import StandardScaler
 
 app= Flask(__name__)
 
 ##import model and standard scalar pickle
-model=pickle.load(open(r'C:\Users\sowmy\Desktop\End Project\Model\trained_model.pkl','rb'))
-scaler=pickle.load(open(r'C:\Users\sowmy\Desktop\End Project\Model\end_scaler.pkl','rb'))
+model=pickle.load(open(r'Model/trained_model.pkl','rb'))
+scaler=pickle.load(open(r'Model/end_scaler.pkl','rb'))
 
+@app.route('/')
+def home():
+    return render_template('Project.html')
 
-@app.route('/',methods=['GET','POST'])
-def predict_datapoint():
+@app.route('/predict',methods=['GET','POST'])
+def predict():
     if request.method=='POST':
         temperature=float(request.form.get('temperature'))
         humidity=float(request.form.get('humidity'))
@@ -38,11 +41,12 @@ def predict_datapoint():
         Result=ferti_dict.get(result[0])
         
     
-        return render_template('Project.html',result=Result)
+        return render_template('Project.html',result= 'Most suaitable fertilizer for your crop : {}'.format(Result))
 
     else:
         return render_template('Project.html')
-    from app import app
+
+    
 
 if __name__ == '__main__':
     app.run(debug=True)
